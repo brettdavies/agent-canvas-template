@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+# Repo-wide lint + type-check before each push (Biome + tsc).
+# No-op until package.json and dev dependencies exist.
+set -euo pipefail
+
+root=$(git rev-parse --show-toplevel)
+cd "$root"
+
+[ -f package.json ] || {
+  echo "pre-push: no package.json yet, skipping lint/type-check"
+  exit 0
+}
+
+bin=node_modules/.bin
+
+if [ -x "$bin/biome" ]; then
+  "$bin/biome" check .
+else
+  echo "pre-push: biome not installed, skipping lint"
+fi
+
+if [ -x "$bin/tsc" ]; then
+  "$bin/tsc" --noEmit
+else
+  echo "pre-push: typescript not installed, skipping type-check"
+fi

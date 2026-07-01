@@ -1,0 +1,33 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
+    "jsx": "react-jsx",
+    "types": ["node", "vite/client"],
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "moduleDetection": "force",
+    "ignoreDeprecations": "6.0",
+    "baseUrl": ".",
+    "paths": {
+      "@shared": ["shared/index.ts"],
+      "@shared/*": ["shared/*"]
+    }
+  },
+  "include": [
+    "src",
+    "server",
+    "shared",
+    "db",
+    "vite.config.ts",
+    "vitest.config.ts",
+    "drizzle.config.ts",
+    "drizzle.d1.config.ts"
+  ]
+}

@@ -1,0 +1,774 @@
+{
+  "note": "Sample MLB StatsAPI data (2024-07-13/14) for the agent-canvas worked example. Regenerate real data with db/scripts/load-*.",
+  "teams": [
+    {
+      "mlbId": 109,
+      "name": "Arizona Diamondbacks",
+      "abbreviation": "AZ",
+      "leagueName": "National League",
+      "divisionName": "National League West",
+      "active": true
+    },
+    {
+      "mlbId": 144,
+      "name": "Atlanta Braves",
+      "abbreviation": "ATL",
+      "leagueName": "National League",
+      "divisionName": "National League East",
+      "active": true
+    },
+    {
+      "mlbId": 110,
+      "name": "Baltimore Orioles",
+      "abbreviation": "BAL",
+      "leagueName": "American League",
+      "divisionName": "American League East",
+      "active": true
+    },
+    {
+      "mlbId": 111,
+      "name": "Boston Red Sox",
+      "abbreviation": "BOS",
+      "leagueName": "American League",
+      "divisionName": "American League East",
+      "active": true
+    },
+    {
+      "mlbId": 112,
+      "name": "Chicago Cubs",
+      "abbreviation": "CHC",
+      "leagueName": "National League",
+      "divisionName": "National League Central",
+      "active": true
+    },
+    {
+      "mlbId": 145,
+      "name": "Chicago White Sox",
+      "abbreviation": "CWS",
+      "leagueName": "American League",
+      "divisionName": "American League Central",
+      "active": true
+    },
+    {
+      "mlbId": 113,
+      "name": "Cincinnati Reds",
+      "abbreviation": "CIN",
+      "leagueName": "National League",
+      "divisionName": "National League Central",
+      "active": true
+    },
+    {
+      "mlbId": 114,
+      "name": "Cleveland Guardians",
+      "abbreviation": "CLE",
+      "leagueName": "American League",
+      "divisionName": "American League Central",
+      "active": true
+    },
+    {
+      "mlbId": 115,
+      "name": "Colorado Rockies",
+      "abbreviation": "COL",
+      "leagueName": "National League",
+      "divisionName": "National League West",
+      "active": true
+    },
+    {
+      "mlbId": 116,
+      "name": "Detroit Tigers",
+      "abbreviation": "DET",
+      "leagueName": "American League",
+      "divisionName": "American League Central",
+      "active": true
+    },
+    {
+      "mlbId": 117,
+      "name": "Houston Astros",
+      "abbreviation": "HOU",
+      "leagueName": "American League",
+      "divisionName": "American League West",
+      "active": true
+    },
+    {
+      "mlbId": 118,
+      "name": "Kansas City Royals",
+      "abbreviation": "KC",
+      "leagueName": "American League",
+      "divisionName": "American League Central",
+      "active": true
+    },
+    {
+      "mlbId": 108,
+      "name": "Los Angeles Angels",
+      "abbreviation": "LAA",
+      "leagueName": "American League",
+      "divisionName": "American League West",
+      "active": true
+    },
+    {
+      "mlbId": 119,
+      "name": "Los Angeles Dodgers",
+      "abbreviation": "LAD",
+      "leagueName": "National League",
+      "divisionName": "National League West",
+      "active": true
+    },
+    {
+      "mlbId": 146,
+      "name": "Miami Marlins",
+      "abbreviation": "MIA",
+      "leagueName": "National League",
+      "divisionName": "National League East",
+      "active": true
+    },
+    {
+      "mlbId": 158,
+      "name": "Milwaukee Brewers",
+      "abbreviation": "MIL",
+      "leagueName": "National League",
+      "divisionName": "National League Central",
+      "active": true
+    },
+    {
+      "mlbId": 142,
+      "name": "Minnesota Twins",
+      "abbreviation": "MIN",
+      "leagueName": "American League",
+      "divisionName": "American League Central",
+      "active": true
+    },
+    {
+      "mlbId": 121,
+      "name": "New York Mets",
+      "abbreviation": "NYM",
+      "leagueName": "National League",
+      "divisionName": "National League East",
+      "active": true
+    },
+    {
+      "mlbId": 147,
+      "name": "New York Yankees",
+      "abbreviation": "NYY",
+      "leagueName": "American League",
+      "divisionName": "American League East",
+      "active": true
+    },
+    {
+      "mlbId": 133,
+      "name": "Oakland Athletics",
+      "abbreviation": "OAK",
+      "leagueName": "American League",
+      "divisionName": "American League West",
+      "active": true
+    },
+    {
+      "mlbId": 143,
+      "name": "Philadelphia Phillies",
+      "abbreviation": "PHI",
+      "leagueName": "National League",
+      "divisionName": "National League East",
+      "active": true
+    },
+    {
+      "mlbId": 134,
+      "name": "Pittsburgh Pirates",
+      "abbreviation": "PIT",
+      "leagueName": "National League",
+      "divisionName": "National League Central",
+      "active": true
+    },
+    {
+      "mlbId": 135,
+      "name": "San Diego Padres",
+      "abbreviation": "SD",
+      "leagueName": "National League",
+      "divisionName": "National League West",
+      "active": true
+    },
+    {
+      "mlbId": 137,
+      "name": "San Francisco Giants",
+      "abbreviation": "SF",
+      "leagueName": "National League",
+      "divisionName": "National League West",
+      "active": true
+    },
+    {
+      "mlbId": 136,
+      "name": "Seattle Mariners",
+      "abbreviation": "SEA",
+      "leagueName": "American League",
+      "divisionName": "American League West",
+      "active": true
+    },
+    {
+      "mlbId": 138,
+      "name": "St. Louis Cardinals",
+      "abbreviation": "STL",
+      "leagueName": "National League",
+      "divisionName": "National League Central",
+      "active": true
+    },
+    {
+      "mlbId": 139,
+      "name": "Tampa Bay Rays",
+      "abbreviation": "TB",
+      "leagueName": "American League",
+      "divisionName": "American League East",
+      "active": true
+    },
+    {
+      "mlbId": 140,
+      "name": "Texas Rangers",
+      "abbreviation": "TEX",
+      "leagueName": "American League",
+      "divisionName": "American League West",
+      "active": true
+    },
+    {
+      "mlbId": 141,
+      "name": "Toronto Blue Jays",
+      "abbreviation": "TOR",
+      "leagueName": "American League",
+      "divisionName": "American League East",
+      "active": true
+    },
+    {
+      "mlbId": 120,
+      "name": "Washington Nationals",
+      "abbreviation": "WSH",
+      "leagueName": "National League",
+      "divisionName": "National League East",
+      "active": true
+    }
+  ],
+  "venues": [
+    {
+      "mlbId": 1,
+      "name": "Angel Stadium"
+    },
+    {
+      "mlbId": 2,
+      "name": "Oriole Park at Camden Yards"
+    },
+    {
+      "mlbId": 3,
+      "name": "Fenway Park"
+    },
+    {
+      "mlbId": 4,
+      "name": "Guaranteed Rate Field"
+    },
+    {
+      "mlbId": 12,
+      "name": "Tropicana Field"
+    },
+    {
+      "mlbId": 15,
+      "name": "Chase Field"
+    },
+    {
+      "mlbId": 32,
+      "name": "American Family Field"
+    },
+    {
+      "mlbId": 2392,
+      "name": "Minute Maid Park"
+    },
+    {
+      "mlbId": 2394,
+      "name": "Comerica Park"
+    },
+    {
+      "mlbId": 2395,
+      "name": "Oracle Park"
+    },
+    {
+      "mlbId": 2602,
+      "name": "Great American Ball Park"
+    },
+    {
+      "mlbId": 2680,
+      "name": "Petco Park"
+    },
+    {
+      "mlbId": 2681,
+      "name": "Citizens Bank Park"
+    },
+    {
+      "mlbId": 2889,
+      "name": "Busch Stadium"
+    },
+    {
+      "mlbId": 3289,
+      "name": "Citi Field"
+    }
+  ],
+  "games": [
+    {
+      "gamePk": 745066,
+      "season": 2024,
+      "gameType": "R",
+      "officialDate": "2024-07-14",
+      "awayId": 114,
+      "awayName": "Cleveland Guardians",
+      "awayScore": 0,
+      "homeId": 139,
+      "homeName": "Tampa Bay Rays",
+      "homeScore": 2,
+      "statusDetailed": "Final",
+      "venueMlbId": 12,
+      "venueName": "Tropicana Field"
+    },
+    {
+      "gamePk": 745067,
+      "season": 2024,
+      "gameType": "R",
+      "officialDate": "2024-07-13",
+      "awayId": 114,
+      "awayName": "Cleveland Guardians",
+      "awayScore": 4,
+      "homeId": 139,
+      "homeName": "Tampa Bay Rays",
+      "homeScore": 2,
+      "statusDetailed": "Final",
+      "venueMlbId": 12,
+      "venueName": "Tropicana Field"
+    },
+    {
+      "gamePk": 745151,
+      "season": 2024,
+      "gameType": "R",
+      "officialDate": "2024-07-14",
+      "awayId": 112,
+      "awayName": "Chicago Cubs",
+      "awayScore": 8,
+      "homeId": 138,
+      "homeName": "St. Louis Cardinals",
+      "homeScore": 3,
+      "statusDetailed": "Final",
+      "venueMlbId": 2889,
+      "venueName": "Busch Stadium"
+    },
+    {
+      "gamePk": 745152,
+      "season": 2024,
+      "gameType": "R",
+      "officialDate": "2024-07-13",
+      "awayId": 112,
+      "awayName": "Chicago Cubs",
+      "awayScore": 3,
+      "homeId": 138,
+      "homeName": "St. Louis Cardinals",
+      "homeScore": 11,
+      "statusDetailed": "Final",
+      "venueMlbId": 2889,
+      "venueName": "Busch Stadium"
+    },
+    {
+      "gamePk": 745175,
+      "season": 2024,
+      "gameType": "R",
+      "officialDate": "2024-07-13",
+      "awayId": 112,
+      "awayName": "Chicago Cubs",
+      "awayScore": 4,
+      "homeId": 138,
+      "homeName": "St. Louis Cardinals",
+      "homeScore": 5,
+      "statusDetailed": "Final",
+      "venueMlbId": 2889,
+      "venueName": "Busch Stadium"
+    },
+    {
+      "gamePk": 745311,
+      "season": 2024,
+      "gameType": "R",
+      "officialDate": "2024-07-13",
+      "awayId": 142,
+      "awayName": "Minnesota Twins",
+      "awayScore": 4,
+      "homeId": 137,
+      "homeName": "San Francisco Giants",
+      "homeScore": 2,
+      "statusDetailed": "Final",
+      "venueMlbId": 2395,
+      "venueName": "Oracle Park"
+    },
+    {
+      "gamePk": 745314,
+      "season": 2024,
+      "gameType": "R",
+      "officialDate": "2024-07-14",
+      "awayId": 142,
+      "awayName": "Minnesota Twins",
+      "awayScore": 2,
+      "homeId": 137,
+      "homeName": "San Francisco Giants",
+      "homeScore": 3,
+      "statusDetailed": "Final",
+      "venueMlbId": 2395,
+      "venueName": "Oracle Park"
+    },
+    {
+      "gamePk": 745385,
+      "season": 2024,
+      "gameType": "R",
+      "officialDate": "2024-07-14",
+      "awayId": 144,
+      "awayName": "Atlanta Braves",
+      "awayScore": 6,
+      "homeId": 135,
+      "homeName": "San Diego Padres",
+      "homeScore": 3,
+      "statusDetailed": "Final",
+      "venueMlbId": 2680,
+      "venueName": "Petco Park"
+    },
+    {
+      "gamePk": 745392,
+      "season": 2024,
+      "gameType": "R",
+      "officialDate": "2024-07-13",
+      "awayId": 144,
+      "awayName": "Atlanta Braves",
+      "awayScore": 0,
+      "homeId": 135,
+      "homeName": "San Diego Padres",
+      "homeScore": 4,
+      "statusDetailed": "Final",
+      "venueMlbId": 2680,
+      "venueName": "Petco Park"
+    },
+    {
+      "gamePk": 745549,
+      "season": 2024,
+      "gameType": "R",
+      "officialDate": "2024-07-13",
+      "awayId": 133,
+      "awayName": "Oakland Athletics",
+      "awayScore": 5,
+      "homeId": 143,
+      "homeName": "Philadelphia Phillies",
+      "homeScore": 11,
+      "statusDetailed": "Final",
+      "venueMlbId": 2681,
+      "venueName": "Citizens Bank Park"
+    },
+    {
+      "gamePk": 745551,
+      "season": 2024,
+      "gameType": "R",
+      "officialDate": "2024-07-14",
+      "awayId": 133,
+      "awayName": "Oakland Athletics",
+      "awayScore": 18,
+      "homeId": 143,
+      "homeName": "Philadelphia Phillies",
+      "homeScore": 3,
+      "statusDetailed": "Final",
+      "venueMlbId": 2681,
+      "venueName": "Citizens Bank Park"
+    },
+    {
+      "gamePk": 745797,
+      "season": 2024,
+      "gameType": "R",
+      "officialDate": "2024-07-14",
+      "awayId": 115,
+      "awayName": "Colorado Rockies",
+      "awayScore": 8,
+      "homeId": 121,
+      "homeName": "New York Mets",
+      "homeScore": 5,
+      "statusDetailed": "Final",
+      "venueMlbId": 3289,
+      "venueName": "Citi Field"
+    },
+    {
+      "gamePk": 745798,
+      "season": 2024,
+      "gameType": "R",
+      "officialDate": "2024-07-13",
+      "awayId": 115,
+      "awayName": "Colorado Rockies",
+      "awayScore": 3,
+      "homeId": 121,
+      "homeName": "New York Mets",
+      "homeScore": 7,
+      "statusDetailed": "Final",
+      "venueMlbId": 3289,
+      "venueName": "Citi Field"
+    },
+    {
+      "gamePk": 745962,
+      "season": 2024,
+      "gameType": "R",
+      "officialDate": "2024-07-14",
+      "awayId": 120,
+      "awayName": "Washington Nationals",
+      "awayScore": 3,
+      "homeId": 158,
+      "homeName": "Milwaukee Brewers",
+      "homeScore": 9,
+      "statusDetailed": "Final",
+      "venueMlbId": 32,
+      "venueName": "American Family Field"
+    },
+    {
+      "gamePk": 745963,
+      "season": 2024,
+      "gameType": "R",
+      "officialDate": "2024-07-13",
+      "awayId": 120,
+      "awayName": "Washington Nationals",
+      "awayScore": 6,
+      "homeId": 158,
+      "homeName": "Milwaukee Brewers",
+      "homeScore": 5,
+      "statusDetailed": "Final",
+      "venueMlbId": 32,
+      "venueName": "American Family Field"
+    },
+    {
+      "gamePk": 746201,
+      "season": 2024,
+      "gameType": "R",
+      "officialDate": "2024-07-14",
+      "awayId": 136,
+      "awayName": "Seattle Mariners",
+      "awayScore": 2,
+      "homeId": 108,
+      "homeName": "Los Angeles Angels",
+      "homeScore": 3,
+      "statusDetailed": "Final",
+      "venueMlbId": 1,
+      "venueName": "Angel Stadium"
+    },
+    {
+      "gamePk": 746202,
+      "season": 2024,
+      "gameType": "R",
+      "officialDate": "2024-07-13",
+      "awayId": 136,
+      "awayName": "Seattle Mariners",
+      "awayScore": 1,
+      "homeId": 108,
+      "homeName": "Los Angeles Angels",
+      "homeScore": 2,
+      "statusDetailed": "Final",
+      "venueMlbId": 1,
+      "venueName": "Angel Stadium"
+    },
+    {
+      "gamePk": 746369,
+      "season": 2024,
+      "gameType": "R",
+      "officialDate": "2024-07-13",
+      "awayId": 140,
+      "awayName": "Texas Rangers",
+      "awayScore": 2,
+      "homeId": 117,
+      "homeName": "Houston Astros",
+      "homeScore": 1,
+      "statusDetailed": "Final",
+      "venueMlbId": 2392,
+      "venueName": "Minute Maid Park"
+    },
+    {
+      "gamePk": 746370,
+      "season": 2024,
+      "gameType": "R",
+      "officialDate": "2024-07-14",
+      "awayId": 140,
+      "awayName": "Texas Rangers",
+      "awayScore": 4,
+      "homeId": 117,
+      "homeName": "Houston Astros",
+      "homeScore": 2,
+      "statusDetailed": "Final",
+      "venueMlbId": 2392,
+      "venueName": "Minute Maid Park"
+    },
+    {
+      "gamePk": 746447,
+      "season": 2024,
+      "gameType": "R",
+      "officialDate": "2024-07-13",
+      "awayId": 119,
+      "awayName": "Los Angeles Dodgers",
+      "awayScore": 9,
+      "homeId": 116,
+      "homeName": "Detroit Tigers",
+      "homeScore": 11,
+      "statusDetailed": "Final",
+      "venueMlbId": 2394,
+      "venueName": "Comerica Park"
+    },
+    {
+      "gamePk": 746449,
+      "season": 2024,
+      "gameType": "R",
+      "officialDate": "2024-07-14",
+      "awayId": 119,
+      "awayName": "Los Angeles Dodgers",
+      "awayScore": 3,
+      "homeId": 116,
+      "homeName": "Detroit Tigers",
+      "homeScore": 4,
+      "statusDetailed": "Final",
+      "venueMlbId": 2394,
+      "venueName": "Comerica Park"
+    },
+    {
+      "gamePk": 746686,
+      "season": 2024,
+      "gameType": "R",
+      "officialDate": "2024-07-14",
+      "awayId": 146,
+      "awayName": "Miami Marlins",
+      "awayScore": 3,
+      "homeId": 113,
+      "homeName": "Cincinnati Reds",
+      "homeScore": 2,
+      "statusDetailed": "Final",
+      "venueMlbId": 2602,
+      "venueName": "Great American Ball Park"
+    },
+    {
+      "gamePk": 746687,
+      "season": 2024,
+      "gameType": "R",
+      "officialDate": "2024-07-13",
+      "awayId": 146,
+      "awayName": "Miami Marlins",
+      "awayScore": 6,
+      "homeId": 113,
+      "homeName": "Cincinnati Reds",
+      "homeScore": 10,
+      "statusDetailed": "Final",
+      "venueMlbId": 2602,
+      "venueName": "Great American Ball Park"
+    },
+    {
+      "gamePk": 746766,
+      "season": 2024,
+      "gameType": "R",
+      "officialDate": "2024-07-13",
+      "awayId": 134,
+      "awayName": "Pittsburgh Pirates",
+      "awayScore": 6,
+      "homeId": 145,
+      "homeName": "Chicago White Sox",
+      "homeScore": 2,
+      "statusDetailed": "Final",
+      "venueMlbId": 4,
+      "venueName": "Guaranteed Rate Field"
+    },
+    {
+      "gamePk": 746769,
+      "season": 2024,
+      "gameType": "R",
+      "officialDate": "2024-07-14",
+      "awayId": 134,
+      "awayName": "Pittsburgh Pirates",
+      "awayScore": 9,
+      "homeId": 145,
+      "homeName": "Chicago White Sox",
+      "homeScore": 4,
+      "statusDetailed": "Final",
+      "venueMlbId": 4,
+      "venueName": "Guaranteed Rate Field"
+    },
+    {
+      "gamePk": 746930,
+      "season": 2024,
+      "gameType": "R",
+      "officialDate": "2024-07-13",
+      "awayId": 118,
+      "awayName": "Kansas City Royals",
+      "awayScore": 0,
+      "homeId": 111,
+      "homeName": "Boston Red Sox",
+      "homeScore": 5,
+      "statusDetailed": "Final",
+      "venueMlbId": 3,
+      "venueName": "Fenway Park"
+    },
+    {
+      "gamePk": 746932,
+      "season": 2024,
+      "gameType": "R",
+      "officialDate": "2024-07-14",
+      "awayId": 118,
+      "awayName": "Kansas City Royals",
+      "awayScore": 4,
+      "homeId": 111,
+      "homeName": "Boston Red Sox",
+      "homeScore": 5,
+      "statusDetailed": "Final",
+      "venueMlbId": 3,
+      "venueName": "Fenway Park"
+    },
+    {
+      "gamePk": 747009,
+      "season": 2024,
+      "gameType": "R",
+      "officialDate": "2024-07-14",
+      "awayId": 147,
+      "awayName": "New York Yankees",
+      "awayScore": 5,
+      "homeId": 110,
+      "homeName": "Baltimore Orioles",
+      "homeScore": 6,
+      "statusDetailed": "Final",
+      "venueMlbId": 2,
+      "venueName": "Oriole Park at Camden Yards"
+    },
+    {
+      "gamePk": 747013,
+      "season": 2024,
+      "gameType": "R",
+      "officialDate": "2024-07-13",
+      "awayId": 147,
+      "awayName": "New York Yankees",
+      "awayScore": 6,
+      "homeId": 110,
+      "homeName": "Baltimore Orioles",
+      "homeScore": 1,
+      "statusDetailed": "Final",
+      "venueMlbId": 2,
+      "venueName": "Oriole Park at Camden Yards"
+    },
+    {
+      "gamePk": 747176,
+      "season": 2024,
+      "gameType": "R",
+      "officialDate": "2024-07-14",
+      "awayId": 141,
+      "awayName": "Toronto Blue Jays",
+      "awayScore": 8,
+      "homeId": 109,
+      "homeName": "Arizona Diamondbacks",
+      "homeScore": 7,
+      "statusDetailed": "Final",
+      "venueMlbId": 15,
+      "venueName": "Chase Field"
+    },
+    {
+      "gamePk": 747177,
+      "season": 2024,
+      "gameType": "R",
+      "officialDate": "2024-07-13",
+      "awayId": 141,
+      "awayName": "Toronto Blue Jays",
+      "awayScore": 1,
+      "homeId": 109,
+      "homeName": "Arizona Diamondbacks",
+      "homeScore": 12,
+      "statusDetailed": "Final",
+      "venueMlbId": 15,
+      "venueName": "Chase Field"
+    }
+  ]
+}

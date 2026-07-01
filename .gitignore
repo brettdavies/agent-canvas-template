@@ -1,0 +1,17 @@
+node_modules/
+dist/
+.wrangler/
+worker-configuration.d.ts
+.env
+.env.*
+!.env.example
+*.log
+coverage/
+.DS_Store
+
+# Large local data caches — regenerable; durable copy is Postgres + the db/scripts/ loaders
+db/feeds/
+db/embeddings/
+.claude/settings.local.json
+!AGENTS.md
+.gstack/

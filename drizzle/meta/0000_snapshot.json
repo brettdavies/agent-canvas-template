@@ -1,0 +1,2338 @@
+{
+  "id": "df609b35-e40d-424a-b384-87e2682a6b6b",
+  "prevId": "00000000-0000-0000-0000-000000000000",
+  "version": "7",
+  "dialect": "postgresql",
+  "tables": {
+    "public.homeruns": {
+      "name": "homeruns",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "season": {
+          "name": "season",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "play_id": {
+          "name": "play_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "title": {
+          "name": "title",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "exit_velocity": {
+          "name": "exit_velocity",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "hit_distance": {
+          "name": "hit_distance",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "launch_angle": {
+          "name": "launch_angle",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "video": {
+          "name": "video",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "homeruns_play_id_unique": {
+          "name": "homeruns_play_id_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "play_id"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.notes": {
+      "name": "notes",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "body": {
+          "name": "body",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.stats_embeddings": {
+      "name": "stats_embeddings",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "source_table": {
+          "name": "source_table",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "source_id": {
+          "name": "source_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "column_name": {
+          "name": "column_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "content": {
+          "name": "content",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "model": {
+          "name": "model",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "embedding": {
+          "name": "embedding",
+          "type": "vector(1536)",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "stats_embeddings_hnsw": {
+          "name": "stats_embeddings_hnsw",
+          "columns": [
+            {
+              "expression": "embedding",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last",
+              "opclass": "vector_cosine_ops"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "hnsw",
+          "with": {}
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "stats_embeddings_source_table_source_id_column_name_unique": {
+          "name": "stats_embeddings_source_table_source_id_column_name_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "source_table",
+            "source_id",
+            "column_name"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.stats_game_batting": {
+      "name": "stats_game_batting",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "game_id": {
+          "name": "game_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "team_id": {
+          "name": "team_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "person_id": {
+          "name": "person_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "batting_order": {
+          "name": "batting_order",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "position": {
+          "name": "position",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "at_bats": {
+          "name": "at_bats",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "runs": {
+          "name": "runs",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "hits": {
+          "name": "hits",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "doubles": {
+          "name": "doubles",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "triples": {
+          "name": "triples",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "home_runs": {
+          "name": "home_runs",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "rbi": {
+          "name": "rbi",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "base_on_balls": {
+          "name": "base_on_balls",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "strike_outs": {
+          "name": "strike_outs",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "stolen_bases": {
+          "name": "stolen_bases",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "left_on_base": {
+          "name": "left_on_base",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "total_bases": {
+          "name": "total_bases",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "plate_appearances": {
+          "name": "plate_appearances",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "hit_by_pitch": {
+          "name": "hit_by_pitch",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "sac_flies": {
+          "name": "sac_flies",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "sac_bunts": {
+          "name": "sac_bunts",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "ground_into_double_play": {
+          "name": "ground_into_double_play",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "raw": {
+          "name": "raw",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "stats_game_batting_game_id_stats_games_id_fk": {
+          "name": "stats_game_batting_game_id_stats_games_id_fk",
+          "tableFrom": "stats_game_batting",
+          "tableTo": "stats_games",
+          "columnsFrom": [
+            "game_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "stats_game_batting_team_id_stats_teams_id_fk": {
+          "name": "stats_game_batting_team_id_stats_teams_id_fk",
+          "tableFrom": "stats_game_batting",
+          "tableTo": "stats_teams",
+          "columnsFrom": [
+            "team_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "stats_game_batting_person_id_stats_people_id_fk": {
+          "name": "stats_game_batting_person_id_stats_people_id_fk",
+          "tableFrom": "stats_game_batting",
+          "tableTo": "stats_people",
+          "columnsFrom": [
+            "person_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "stats_game_batting_game_id_person_id_unique": {
+          "name": "stats_game_batting_game_id_person_id_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "game_id",
+            "person_id"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.stats_game_fielding": {
+      "name": "stats_game_fielding",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "game_id": {
+          "name": "game_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "team_id": {
+          "name": "team_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "person_id": {
+          "name": "person_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "put_outs": {
+          "name": "put_outs",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "assists": {
+          "name": "assists",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "errors": {
+          "name": "errors",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "chances": {
+          "name": "chances",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "passed_ball": {
+          "name": "passed_ball",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "pickoffs": {
+          "name": "pickoffs",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "raw": {
+          "name": "raw",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "stats_game_fielding_game_id_stats_games_id_fk": {
+          "name": "stats_game_fielding_game_id_stats_games_id_fk",
+          "tableFrom": "stats_game_fielding",
+          "tableTo": "stats_games",
+          "columnsFrom": [
+            "game_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "stats_game_fielding_team_id_stats_teams_id_fk": {
+          "name": "stats_game_fielding_team_id_stats_teams_id_fk",
+          "tableFrom": "stats_game_fielding",
+          "tableTo": "stats_teams",
+          "columnsFrom": [
+            "team_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "stats_game_fielding_person_id_stats_people_id_fk": {
+          "name": "stats_game_fielding_person_id_stats_people_id_fk",
+          "tableFrom": "stats_game_fielding",
+          "tableTo": "stats_people",
+          "columnsFrom": [
+            "person_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "stats_game_fielding_game_id_person_id_unique": {
+          "name": "stats_game_fielding_game_id_person_id_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "game_id",
+            "person_id"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.stats_game_pitching": {
+      "name": "stats_game_pitching",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "game_id": {
+          "name": "game_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "team_id": {
+          "name": "team_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "person_id": {
+          "name": "person_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "innings_pitched": {
+          "name": "innings_pitched",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "hits": {
+          "name": "hits",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "runs": {
+          "name": "runs",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "earned_runs": {
+          "name": "earned_runs",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "home_runs": {
+          "name": "home_runs",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "base_on_balls": {
+          "name": "base_on_balls",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "strike_outs": {
+          "name": "strike_outs",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "batters_faced": {
+          "name": "batters_faced",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "pitches_thrown": {
+          "name": "pitches_thrown",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "balls": {
+          "name": "balls",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "strikes": {
+          "name": "strikes",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "wins": {
+          "name": "wins",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "losses": {
+          "name": "losses",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "saves": {
+          "name": "saves",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "holds": {
+          "name": "holds",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "blown_saves": {
+          "name": "blown_saves",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "hit_batsmen": {
+          "name": "hit_batsmen",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "wild_pitches": {
+          "name": "wild_pitches",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "balks": {
+          "name": "balks",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "raw": {
+          "name": "raw",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "stats_game_pitching_game_id_stats_games_id_fk": {
+          "name": "stats_game_pitching_game_id_stats_games_id_fk",
+          "tableFrom": "stats_game_pitching",
+          "tableTo": "stats_games",
+          "columnsFrom": [
+            "game_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "stats_game_pitching_team_id_stats_teams_id_fk": {
+          "name": "stats_game_pitching_team_id_stats_teams_id_fk",
+          "tableFrom": "stats_game_pitching",
+          "tableTo": "stats_teams",
+          "columnsFrom": [
+            "team_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "stats_game_pitching_person_id_stats_people_id_fk": {
+          "name": "stats_game_pitching_person_id_stats_people_id_fk",
+          "tableFrom": "stats_game_pitching",
+          "tableTo": "stats_people",
+          "columnsFrom": [
+            "person_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "stats_game_pitching_game_id_person_id_unique": {
+          "name": "stats_game_pitching_game_id_person_id_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "game_id",
+            "person_id"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.stats_games": {
+      "name": "stats_games",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "game_pk": {
+          "name": "game_pk",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "game_guid": {
+          "name": "game_guid",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "season": {
+          "name": "season",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "game_type": {
+          "name": "game_type",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "game_date": {
+          "name": "game_date",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "official_date": {
+          "name": "official_date",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "away_team_id": {
+          "name": "away_team_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "home_team_id": {
+          "name": "home_team_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "away_score": {
+          "name": "away_score",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "home_score": {
+          "name": "home_score",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "venue_id": {
+          "name": "venue_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "status_abstract": {
+          "name": "status_abstract",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "status_detailed": {
+          "name": "status_detailed",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "status_coded": {
+          "name": "status_coded",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "day_night": {
+          "name": "day_night",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "double_header": {
+          "name": "double_header",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "game_number": {
+          "name": "game_number",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "series_description": {
+          "name": "series_description",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "series_game_number": {
+          "name": "series_game_number",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "games_in_series": {
+          "name": "games_in_series",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "scheduled_innings": {
+          "name": "scheduled_innings",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "weather_condition": {
+          "name": "weather_condition",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "weather_temp": {
+          "name": "weather_temp",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "weather_wind": {
+          "name": "weather_wind",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "win_pitcher_id": {
+          "name": "win_pitcher_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "loss_pitcher_id": {
+          "name": "loss_pitcher_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "save_pitcher_id": {
+          "name": "save_pitcher_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "attendance": {
+          "name": "attendance",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "raw": {
+          "name": "raw",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "stats_games_away_team_id_stats_teams_id_fk": {
+          "name": "stats_games_away_team_id_stats_teams_id_fk",
+          "tableFrom": "stats_games",
+          "tableTo": "stats_teams",
+          "columnsFrom": [
+            "away_team_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "stats_games_home_team_id_stats_teams_id_fk": {
+          "name": "stats_games_home_team_id_stats_teams_id_fk",
+          "tableFrom": "stats_games",
+          "tableTo": "stats_teams",
+          "columnsFrom": [
+            "home_team_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "stats_games_venue_id_stats_venues_id_fk": {
+          "name": "stats_games_venue_id_stats_venues_id_fk",
+          "tableFrom": "stats_games",
+          "tableTo": "stats_venues",
+          "columnsFrom": [
+            "venue_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "stats_games_win_pitcher_id_stats_people_id_fk": {
+          "name": "stats_games_win_pitcher_id_stats_people_id_fk",
+          "tableFrom": "stats_games",
+          "tableTo": "stats_people",
+          "columnsFrom": [
+            "win_pitcher_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "stats_games_loss_pitcher_id_stats_people_id_fk": {
+          "name": "stats_games_loss_pitcher_id_stats_people_id_fk",
+          "tableFrom": "stats_games",
+          "tableTo": "stats_people",
+          "columnsFrom": [
+            "loss_pitcher_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "stats_games_save_pitcher_id_stats_people_id_fk": {
+          "name": "stats_games_save_pitcher_id_stats_people_id_fk",
+          "tableFrom": "stats_games",
+          "tableTo": "stats_people",
+          "columnsFrom": [
+            "save_pitcher_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "stats_games_game_pk_unique": {
+          "name": "stats_games_game_pk_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "game_pk"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.stats_homeruns": {
+      "name": "stats_homeruns",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "season": {
+          "name": "season",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "play_id": {
+          "name": "play_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "title": {
+          "name": "title",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "exit_velocity": {
+          "name": "exit_velocity",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "hit_distance": {
+          "name": "hit_distance",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "launch_angle": {
+          "name": "launch_angle",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "video": {
+          "name": "video",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "raw": {
+          "name": "raw",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.stats_linescore": {
+      "name": "stats_linescore",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "game_id": {
+          "name": "game_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "inning": {
+          "name": "inning",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "ordinal": {
+          "name": "ordinal",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "home_runs": {
+          "name": "home_runs",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "home_hits": {
+          "name": "home_hits",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "home_errors": {
+          "name": "home_errors",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "home_lob": {
+          "name": "home_lob",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "away_runs": {
+          "name": "away_runs",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "away_hits": {
+          "name": "away_hits",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "away_errors": {
+          "name": "away_errors",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "away_lob": {
+          "name": "away_lob",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "raw": {
+          "name": "raw",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "stats_linescore_game_id_stats_games_id_fk": {
+          "name": "stats_linescore_game_id_stats_games_id_fk",
+          "tableFrom": "stats_linescore",
+          "tableTo": "stats_games",
+          "columnsFrom": [
+            "game_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "stats_linescore_game_id_inning_unique": {
+          "name": "stats_linescore_game_id_inning_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "game_id",
+            "inning"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.stats_officials": {
+      "name": "stats_officials",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "game_id": {
+          "name": "game_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "official_type": {
+          "name": "official_type",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "person_id": {
+          "name": "person_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "full_name": {
+          "name": "full_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "raw": {
+          "name": "raw",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "stats_officials_game_id_stats_games_id_fk": {
+          "name": "stats_officials_game_id_stats_games_id_fk",
+          "tableFrom": "stats_officials",
+          "tableTo": "stats_games",
+          "columnsFrom": [
+            "game_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "stats_officials_person_id_stats_people_id_fk": {
+          "name": "stats_officials_person_id_stats_people_id_fk",
+          "tableFrom": "stats_officials",
+          "tableTo": "stats_people",
+          "columnsFrom": [
+            "person_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.stats_people": {
+      "name": "stats_people",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "mlb_id": {
+          "name": "mlb_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "full_name": {
+          "name": "full_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "first_name": {
+          "name": "first_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "last_name": {
+          "name": "last_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "primary_number": {
+          "name": "primary_number",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "birth_date": {
+          "name": "birth_date",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "current_age": {
+          "name": "current_age",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "birth_city": {
+          "name": "birth_city",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "birth_country": {
+          "name": "birth_country",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "height": {
+          "name": "height",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "weight": {
+          "name": "weight",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "active": {
+          "name": "active",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "position_code": {
+          "name": "position_code",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "position_name": {
+          "name": "position_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "position_type": {
+          "name": "position_type",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "position_abbrev": {
+          "name": "position_abbrev",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "bat_side_code": {
+          "name": "bat_side_code",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "bat_side_desc": {
+          "name": "bat_side_desc",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "pitch_hand_code": {
+          "name": "pitch_hand_code",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "pitch_hand_desc": {
+          "name": "pitch_hand_desc",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "mlb_debut_date": {
+          "name": "mlb_debut_date",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "raw": {
+          "name": "raw",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "stats_people_mlb_id_unique": {
+          "name": "stats_people_mlb_id_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "mlb_id"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.stats_pitches": {
+      "name": "stats_pitches",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "game_id": {
+          "name": "game_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "play_id_fk": {
+          "name": "play_id_fk",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "at_bat_index": {
+          "name": "at_bat_index",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "pitch_number": {
+          "name": "pitch_number",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "play_id": {
+          "name": "play_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "call_code": {
+          "name": "call_code",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "call_description": {
+          "name": "call_description",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "description": {
+          "name": "description",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "pitch_type_code": {
+          "name": "pitch_type_code",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "pitch_type_desc": {
+          "name": "pitch_type_desc",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "is_in_play": {
+          "name": "is_in_play",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "is_strike": {
+          "name": "is_strike",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "is_ball": {
+          "name": "is_ball",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "start_speed": {
+          "name": "start_speed",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "end_speed": {
+          "name": "end_speed",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "strike_zone_top": {
+          "name": "strike_zone_top",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "strike_zone_bottom": {
+          "name": "strike_zone_bottom",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "zone": {
+          "name": "zone",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "type_confidence": {
+          "name": "type_confidence",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "plate_time": {
+          "name": "plate_time",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "extension": {
+          "name": "extension",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "px": {
+          "name": "px",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "pz": {
+          "name": "pz",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "pfx_x": {
+          "name": "pfx_x",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "pfx_z": {
+          "name": "pfx_z",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "break_angle": {
+          "name": "break_angle",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "break_length": {
+          "name": "break_length",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "break_vertical": {
+          "name": "break_vertical",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "break_vertical_induced": {
+          "name": "break_vertical_induced",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "break_horizontal": {
+          "name": "break_horizontal",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "spin_rate": {
+          "name": "spin_rate",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "spin_direction": {
+          "name": "spin_direction",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "exit_velocity": {
+          "name": "exit_velocity",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "launch_angle": {
+          "name": "launch_angle",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "total_distance": {
+          "name": "total_distance",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "trajectory": {
+          "name": "trajectory",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "hardness": {
+          "name": "hardness",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "hit_location": {
+          "name": "hit_location",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "hit_coord_x": {
+          "name": "hit_coord_x",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "hit_coord_y": {
+          "name": "hit_coord_y",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "raw": {
+          "name": "raw",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "stats_pitches_game_id_stats_games_id_fk": {
+          "name": "stats_pitches_game_id_stats_games_id_fk",
+          "tableFrom": "stats_pitches",
+          "tableTo": "stats_games",
+          "columnsFrom": [
+            "game_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "stats_pitches_play_id_fk_stats_plays_id_fk": {
+          "name": "stats_pitches_play_id_fk_stats_plays_id_fk",
+          "tableFrom": "stats_pitches",
+          "tableTo": "stats_plays",
+          "columnsFrom": [
+            "play_id_fk"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "stats_pitches_game_id_at_bat_index_pitch_number_unique": {
+          "name": "stats_pitches_game_id_at_bat_index_pitch_number_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "game_id",
+            "at_bat_index",
+            "pitch_number"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.stats_plays": {
+      "name": "stats_plays",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "game_id": {
+          "name": "game_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "at_bat_index": {
+          "name": "at_bat_index",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "result_type": {
+          "name": "result_type",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "event": {
+          "name": "event",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "event_type": {
+          "name": "event_type",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "description": {
+          "name": "description",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "rbi": {
+          "name": "rbi",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "is_out": {
+          "name": "is_out",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "is_scoring_play": {
+          "name": "is_scoring_play",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "half_inning": {
+          "name": "half_inning",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "inning": {
+          "name": "inning",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "balls": {
+          "name": "balls",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "strikes": {
+          "name": "strikes",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "outs": {
+          "name": "outs",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "batter_id": {
+          "name": "batter_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "pitcher_id": {
+          "name": "pitcher_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "bat_side": {
+          "name": "bat_side",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "pitch_hand": {
+          "name": "pitch_hand",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "raw": {
+          "name": "raw",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "stats_plays_game_id_stats_games_id_fk": {
+          "name": "stats_plays_game_id_stats_games_id_fk",
+          "tableFrom": "stats_plays",
+          "tableTo": "stats_games",
+          "columnsFrom": [
+            "game_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "stats_plays_batter_id_stats_people_id_fk": {
+          "name": "stats_plays_batter_id_stats_people_id_fk",
+          "tableFrom": "stats_plays",
+          "tableTo": "stats_people",
+          "columnsFrom": [
+            "batter_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "stats_plays_pitcher_id_stats_people_id_fk": {
+          "name": "stats_plays_pitcher_id_stats_people_id_fk",
+          "tableFrom": "stats_plays",
+          "tableTo": "stats_people",
+          "columnsFrom": [
+            "pitcher_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "stats_plays_game_id_at_bat_index_unique": {
+          "name": "stats_plays_game_id_at_bat_index_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "game_id",
+            "at_bat_index"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.stats_runners": {
+      "name": "stats_runners",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "game_id": {
+          "name": "game_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "play_id_fk": {
+          "name": "play_id_fk",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "runner_id": {
+          "name": "runner_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "origin_base": {
+          "name": "origin_base",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "start_base": {
+          "name": "start_base",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "end_base": {
+          "name": "end_base",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "out_base": {
+          "name": "out_base",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "is_out": {
+          "name": "is_out",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "is_scoring_event": {
+          "name": "is_scoring_event",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "rbi": {
+          "name": "rbi",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "earned": {
+          "name": "earned",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "event": {
+          "name": "event",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "event_type": {
+          "name": "event_type",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "responsible_pitcher_id": {
+          "name": "responsible_pitcher_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "raw": {
+          "name": "raw",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "stats_runners_game_id_stats_games_id_fk": {
+          "name": "stats_runners_game_id_stats_games_id_fk",
+          "tableFrom": "stats_runners",
+          "tableTo": "stats_games",
+          "columnsFrom": [
+            "game_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "stats_runners_play_id_fk_stats_plays_id_fk": {
+          "name": "stats_runners_play_id_fk_stats_plays_id_fk",
+          "tableFrom": "stats_runners",
+          "tableTo": "stats_plays",
+          "columnsFrom": [
+            "play_id_fk"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "stats_runners_runner_id_stats_people_id_fk": {
+          "name": "stats_runners_runner_id_stats_people_id_fk",
+          "tableFrom": "stats_runners",
+          "tableTo": "stats_people",
+          "columnsFrom": [
+            "runner_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "stats_runners_responsible_pitcher_id_stats_people_id_fk": {
+          "name": "stats_runners_responsible_pitcher_id_stats_people_id_fk",
+          "tableFrom": "stats_runners",
+          "tableTo": "stats_people",
+          "columnsFrom": [
+            "responsible_pitcher_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.stats_teams": {
+      "name": "stats_teams",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "mlb_id": {
+          "name": "mlb_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "abbreviation": {
+          "name": "abbreviation",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "team_name": {
+          "name": "team_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "location_name": {
+          "name": "location_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "league_id": {
+          "name": "league_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "league_name": {
+          "name": "league_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "division_id": {
+          "name": "division_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "division_name": {
+          "name": "division_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "venue_mlb_id": {
+          "name": "venue_mlb_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "first_year_of_play": {
+          "name": "first_year_of_play",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "active": {
+          "name": "active",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "raw": {
+          "name": "raw",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "stats_teams_mlb_id_unique": {
+          "name": "stats_teams_mlb_id_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "mlb_id"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.stats_venues": {
+      "name": "stats_venues",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "mlb_id": {
+          "name": "mlb_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "city": {
+          "name": "city",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "state": {
+          "name": "state",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "state_abbrev": {
+          "name": "state_abbrev",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "country": {
+          "name": "country",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "latitude": {
+          "name": "latitude",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "longitude": {
+          "name": "longitude",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "elevation": {
+          "name": "elevation",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "capacity": {
+          "name": "capacity",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "turf_type": {
+          "name": "turf_type",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "roof_type": {
+          "name": "roof_type",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "left_line": {
+          "name": "left_line",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "center": {
+          "name": "center",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "right_line": {
+          "name": "right_line",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "timezone_id": {
+          "name": "timezone_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "timezone_offset": {
+          "name": "timezone_offset",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "raw": {
+          "name": "raw",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "stats_venues_mlb_id_unique": {
+          "name": "stats_venues_mlb_id_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "mlb_id"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    }
+  },
+  "enums": {},
+  "schemas": {},
+  "sequences": {},
+  "roles": {},
+  "policies": {},
+  "views": {},
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}

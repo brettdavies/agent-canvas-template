@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MLB agent-canvas</title>
+    <meta
+      name="description"
+      content="An agent-native full-stack canvas with a stored MLB game dataset: query games and analyze a posted game list over REST and MCP. Agent access: MCP at /mcp, OpenAPI at /openapi.json, llms.txt at /llms.txt."
+    />
+    <link rel="service-desc" type="application/json" href="/openapi.json" />
+    <link rel="service-doc" type="text/markdown" href="/mcp-skill.md" />
+    <link rel="alternate" type="text/plain" href="/llms.txt" />
+    <link rel="alternate" type="application/json" href="/.well-known/mcp/server-card.json" />
+    <script>
+      // Set the theme before first paint to avoid a flash. Mirrors src/lib/theme.ts.
+      (() => {
+        try {
+          const pref = localStorage.getItem('theme') || 'system';
+          const dark = pref === 'dark' || (pref !== 'light' && matchMedia('(prefers-color-scheme: dark)').matches);
+          document.documentElement.dataset.theme = dark ? 'console' : 'yc';
+        } catch {
+          document.documentElement.dataset.theme = 'yc';
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <noscript>
+      This app needs JavaScript. Machine-readable entry points:
+      <a href="/llms.txt">/llms.txt</a>, <a href="/openapi.json">/openapi.json</a>,
+      <a href="/mcp-skill.md">/mcp-skill.md</a>, and the MCP server (POST) at <code>/mcp</code>.
+    </noscript>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

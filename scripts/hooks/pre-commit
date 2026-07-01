@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+# Lint + type-check the staged contents before each commit (Biome + tsc).
+# No-op until package.json and dev dependencies exist.
+set -euo pipefail
+
+root=$(git rev-parse --show-toplevel)
+cd "$root"
+
+[ -f package.json ] || {
+  echo "pre-commit: no package.json yet, skipping lint/type-check"
+  exit 0
+}
+
+bin=node_modules/.bin
+
+# Biome lint + format check, scoped to staged files.
+if [ -x "$bin/biome" ]; then
+  "$bin/biome" check --staged --no-errors-on-unmatched
+else
+  echo "pre-commit: biome not installed (run bun install), skipping lint"
+fi
+
+# Type-check when TS files are staged (tsc is whole-program).
+mapfile -t staged_ts < <(git diff --cached --name-only --diff-filter=ACMR -- '*.ts' '*.tsx')
+if [ "${#staged_ts[@]}" -gt 0 ]; then
+  if [ -x "$bin/tsc" ]; then
+    "$bin/tsc" --noEmit
+  else
+    echo "pre-commit: typescript not installed, skipping type-check"
+  fi
+fi

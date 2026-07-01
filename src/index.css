@@ -1,0 +1,108 @@
+@import 'tailwindcss';
+@import './styles/base.css';
+
+@plugin 'daisyui' {
+  themes: false;
+}
+
+/* Light: mimics the extracted ycombinator brand + styleguide (.context/ycombinator-*.json).
+   Default theme; the resolver in src/lib/theme.ts swaps data-theme per preference. */
+@plugin 'daisyui/theme' {
+  name: 'yc';
+  default: true;
+  color-scheme: light;
+
+  --color-base-100: #f5f5ee;
+  --color-base-200: #f1f0e9;
+  --color-base-300: #e5e7eb;
+  --color-base-content: #16140f;
+
+  --color-primary: #000000;
+  --color-primary-content: #f5f5ee;
+  --color-secondary: #16140f;
+  --color-secondary-content: #f5f5ee;
+  --color-accent: #f35c24;
+  --color-accent-content: #ffffff;
+  --color-neutral: #16140f;
+  --color-neutral-content: #f5f5ee;
+
+  --color-info: #283352;
+  --color-info-content: #f5f5ee;
+  --color-success: #1a7f37;
+  --color-success-content: #ffffff;
+  --color-warning: #9a6a00;
+  --color-warning-content: #ffffff;
+  --color-error: #cc1b12;
+  --color-error-content: #ffffff;
+
+  --radius-selector: 0.25rem;
+  --radius-field: 0.5rem;
+  --radius-box: 0.5rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 1px;
+  --depth: 0;
+  --noise: 0;
+}
+
+/* Dark: the existing engineering-grade console theme. */
+@plugin 'daisyui/theme' {
+  name: 'console';
+  color-scheme: dark;
+
+  --color-base-100: oklch(0.18 0 0);
+  --color-base-200: oklch(0.23 0 0);
+  --color-base-300: oklch(0.27 0 0);
+  --color-base-content: oklch(0.96 0 0);
+
+  --color-primary: oklch(0.62 0.17 294);
+  --color-primary-content: oklch(0.99 0 0);
+  --color-secondary: oklch(0.7 0.12 245);
+  --color-secondary-content: oklch(0.16 0 0);
+  --color-accent: oklch(0.7 0.12 245);
+  --color-accent-content: oklch(0.16 0 0);
+  --color-neutral: oklch(0.27 0 0);
+  --color-neutral-content: oklch(0.96 0 0);
+
+  --color-info: oklch(0.7 0.12 245);
+  --color-info-content: oklch(0.16 0 0);
+  --color-success: oklch(0.7 0.15 150);
+  --color-success-content: oklch(0.16 0 0);
+  --color-warning: oklch(0.8 0.13 85);
+  --color-warning-content: oklch(0.16 0 0);
+  --color-error: oklch(0.64 0.19 25);
+  --color-error-content: oklch(0.98 0 0);
+
+  --radius-selector: 0.25rem;
+  --radius-field: 0.375rem;
+  --radius-box: 0.625rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 1px;
+  --depth: 0;
+  --noise: 0;
+}
+
+@theme {
+  --font-sans: 'Inter Variable', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono Variable', ui-monospace, 'SF Mono', 'Cascadia Code', Menlo, monospace;
+  --font-serif: 'Source Serif 4 Variable', ui-serif, Georgia, serif;
+}
+
+/* Light theme adopts the ycombinator type + button identity (unlayered so it
+   wins over DaisyUI's layered component + utility rules). */
+[data-theme='yc'] {
+  --font-sans: 'Outfit Variable', ui-sans-serif, system-ui, sans-serif;
+}
+[data-theme='yc'] .btn {
+  border-radius: 9999px;
+}
+[data-theme='yc'] .btn-primary {
+  font-family: var(--font-serif);
+}
+[data-theme='yc'] .brand-mark {
+  background-color: var(--color-accent);
+}
+[data-theme='yc'] .wordmark {
+  font-family: var(--font-sans);
+}
